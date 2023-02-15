@@ -2,11 +2,13 @@
 // import { ChainablePromiseElement } from 'webdriverio';
  import * as  locators from '../MoisturizerPage/moist.Locators';
 // import * as  tasks from '../MoisturizerPage/tasks';
-import assert = require('assert');
+
+import * as commonAssertion from '../../pageobjects/common_assertions'
 
 
-var str= "Moisturizer"
-export var verifyhomeHeader= assert.equal ((await (locators.moistHeader )), str);
+export async function verifyMoistHeader(){
+   commonAssertion.verifyElementIsDisplayed(locators.moistHeader, "ERROR", true)
+}; 
 
 
         

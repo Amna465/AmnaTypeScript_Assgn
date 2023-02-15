@@ -3,41 +3,41 @@ import * as  locators from '../CheckoutPage/checkout.Locators';
 import * as  common from '../common_functions';
 import * as  homeTasks from '../HomePage/home.Tasks';
 
+import * as commonAssertion from '../../pageobjects/common_assertions'
+
 //variable:
-export var listCart;
-
-//export var itemsText: string[] = [];
-var iFrame= locators.Frame;
+ export var detailsCart;
 
 
+ //FUNCTIONS
 
 export async function getValuesCart() 
 {
-  for (let i=0; i<2; i++){
-  var itemsText= await( await (locators.tableValue_1)[i].getText());
-  listCart.push(itemsText)
-} 
-console.log("CART ITEMS:" ,listCart) 
+
+     let itemsCart: any = await browser.$$(locators.tableValue_1).map(elem => elem.getText()); //FETCHING DETAILS OF ALOE PRODUCTS
+         detailsCart= await Promise.all(itemsCart);
+        console.log(detailsCart);
+      console.log("CART ITEMS:" ,detailsCart) 
 }//Printing names of items in cart}
 
 
 
 
 export async function payBtn(){
+    await commonAssertion.verifyElementIsClickable(await locators.paywithcardBtn, "error", true)  
     await common.waitAndClick(await locators.paywithcardBtn)
-    console.log("HOGYA HAI CLICK");
   }
 
 export async function giveInput(){
         //   iFrame= await locators.Frame;      
         //   browser.pause(5000);
-          browser.switchToFrame(iFrame);
+          await browser.switchToFrame(await $(".stripe_checkout_app"));
          
           
         //ENTERING INPUT IN EMAIL FIELD
           await  common.waitAndClick(locators.inputEmail);
           await locators.inputEmail.setValue('test@gmail.com');
-          browser.pause(5000);
+          await browser.pause(5000);
 
         //ENTERING INPUT IN CARD FIELD
           
@@ -61,7 +61,7 @@ export async function giveInput(){
              await browser.keys('\uE01B') 
              await browser.keys('\uE023') 
              await browser.keys('\uE023') //input:199
-             browser.pause(2000);         
+             await browser.pause(2000);         
 
 
          //ENTERING INPUT IN zipcode FIELD
@@ -70,16 +70,17 @@ export async function giveInput(){
           await browser.keys('\uE023') 
           await browser.keys('\uE023') 
         
-         browser.switchToParentFrame();
+         await browser.switchToParentFrame();
      }
 
    export async function makePayment(){
-      
-    await browser.switchToFrame(iFrame);
+    
+    await browser.switchToFrame(await $(".stripe_checkout_app"));
+    await commonAssertion.verifyElementIsClickable(await locators.payBtn, "error", true)
     await  common.waitAndClick(await locators.payBtn);
     console.log("PAYMENT DONE")
-    browser.pause(3000);
-    browser.switchToParentFrame();
+    await browser.pause(3000);
+    await browser.switchToParentFrame();
     }
 
 

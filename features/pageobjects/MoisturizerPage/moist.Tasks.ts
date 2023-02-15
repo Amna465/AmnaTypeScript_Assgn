@@ -1,76 +1,79 @@
 
 import { ChainablePromiseElement } from 'webdriverio';
 import * as  locators from '../MoisturizerPage/moist.Locators';
+import * as  common from '../common_functions';
 
 //VARIABLES:
-export var moistitemsAdded;
+export var moistItemsAdded;
 export var listMoist;
 var prices;
-//VARIABLES
-export var itemsaloe;
 
-export var result;
-export var detailsAloe;
-export var answeraloe;
+ export var answeraloe;
 
-export var itemsalmond;
-export let pricesAlmonds=[];
-export var answeralmonds;
+ export var answeralmonds;
 
-
+ //FUNCTIONS
 
 export async function getDetailsAloe(){
     
-    itemsaloe=locators.productsDetailsAloe;
-    let itemsArray= itemsaloe.map(el => el.getAttribute('onclick')); //FETCHING DETAILS OF ALOE PRODUCTS
-    detailsAloe= await Promise.all(itemsArray);
-    console.log(detailsAloe);
+           var pricesAloe: any=[];
+  
+        let itemsArray: any = await browser.$$(locators.productsDetailsAloe).map(elem => elem.getAttribute('onclick')); //FETCHING DETAILS OF ALOE PRODUCTS
+        var detailsAloe= await Promise.all(itemsArray);
+        console.log(detailsAloe);
+ 
+         pricesAloe= await common.extractPrice(detailsAloe)
+         let result = pricesAloe.map(i=>Number(i));  // CONVERTING STRING TO INT ARRAY
+         
+         var lowestPrice=await common.sort(result);
+         var lowestPriceIndex = lowestPrice[0];
+         console.log(lowestPriceIndex);
 
-    locators.extractPrice(detailsAloe);
-   
-    result = prices.map(i=>Number(i));  // CONVERTING STRING TO INT ARRAY
-     
-    var lowestPrice=locators.sort(result); //SORTING ARRAY
-    var lowestPriceIndex = lowestPrice[0]
-
-
-    let addButtonForAloe = `//button[contains(@onclick, "${[lowestPriceIndex]}")]`;
-    await ( $(addButtonForAloe)).waitForClickable();
-    await ( $(addButtonForAloe)).click();
-    answeraloe= await $(addButtonForAloe).getAttribute('onclick');
-    console.log("Least expensive Aloe Product Added : ",  answeraloe )  ;
-    }
+         let addButtonForAloe = `//button[contains(@onclick, "${[lowestPriceIndex]}")]`;
+         await ( $(addButtonForAloe)).waitForClickable();
+         await ( $(addButtonForAloe)).click();
+          answeraloe= await $(addButtonForAloe).getAttribute('onclick');
+         (console.log("Aloe Product Added", answeraloe));
+}
 
 export async function getDetailsAlmonds(){
-     
-        var highestPrice;
-        itemsalmond=this.productsDetailsAlmonds;
-        let itemsArray_2= itemsalmond.map(el => el.getAttribute('onclick'));
-        const detailsAlmonds = await Promise.all(itemsArray_2);
-        console.log(detailsAlmonds);
-
-        locators.extractPrice(detailsAlmonds);
-
-       
-         let resultAlmonds = pricesAlmonds.map(i=>Number(i));  // CONVERTING STRING TO INT ARRAY
-         
-         highestPrice=locators.sort(resultAlmonds); 
-         highestPrice=highestPrice.reverse(); //SORTING ARRAY IN DESCENDING ORDER
-         var highestPriceIndex = highestPrice[0];
-
-         let addButtonForAlmond = `//button[contains(@onclick, "${[highestPriceIndex]}")]`;
-      
-         await (await $(addButtonForAlmond)).waitForClickable();
-         await (await $(addButtonForAlmond)).click();
-         answeralmonds= await $(addButtonForAlmond).getAttribute('onclick');
-         console.log("Most expensive Almond Product Added: ",answeralmonds);
-    }
-
-//console.log(locators.answeraloe, locators.answeralmonds);
-       listMoist= [answeraloe, answeralmonds];
-       moistitemsAdded= locators.extractNames(listMoist)                
-       console.log("ITEMS CLICKED",  moistitemsAdded);
+    var pricesAlmonds: any=[];
   
-       locators.cartBtn.click();
+    let itemsArrayAlmonds: any = await browser.$$(locators.productsDetailsAlmonds).map(elem => elem.getAttribute('onclick')); //FETCHING DETAILS OF ALOE PRODUCTS
+    var detailsAlmonds= await Promise.all(itemsArrayAlmonds);
+    console.log(detailsAlmonds);
+
+    pricesAlmonds=await common.extractPrice(detailsAlmonds);
+   
+    
+    // for (let i=0; i<detailsAlmonds.length; i++){      //EXTRACTING PRICES
+    //     let a = detailsAlmonds[i].split(',')[1].split(')')[0];
+    //     pricesAlmonds.push(a);
+    //  }
+     let resultAlmonds = await pricesAlmonds.map(i=>Number(i));  // CONVERTING STRING TO INT ARRAY
+     
+    
+     //var highestPrice=resultAlmonds.sort(function(a, b){return a - b}); //SORTING ARRAY
+     var highestPrice= await common.sort(resultAlmonds)
+     highestPrice=highestPrice.reverse()
+     var highestPriceIndex = highestPrice[0];
+     let addButtonForAlmond = `//button[contains(@onclick, "${[highestPriceIndex]}")]`;
+  
+     await (await $(addButtonForAlmond)).waitForClickable();
+     await (await $(addButtonForAlmond)).click();
+      answeralmonds= await $(addButtonForAlmond).getAttribute('onclick');
+     await console.log("Almond Product Added: ",await answeralmonds);
+}
+
+
+export async function getClickedItemsNames(){
+    var str= [answeraloe, answeralmonds];
+    ( console.log( "LIST MOISTURIZER:",str));
+    moistItemsAdded=  common.extractNames(str);
+    return moistItemsAdded;
+}
+
+          
+
 
        

@@ -14,4 +14,4 @@ export function sort(array){
 }
 
 
-module.exports = Header, valuetemperture, sort;
+//module.exports = Header, valuetemperture, sort;
