@@ -1,7 +1,7 @@
-import * as  tasksMoist from '../MoisturizerPage/moist.Tasks';
-import * as  tasksSun from '../SunscreenPage/sun.Tasks';
+import * as  tasksMoist from '../MoisturizerPage/moist.Functions';
+import * as  tasksSun from '../SunscreenPage/sun.Functions';
 import * as  locators from '../CheckoutPage/checkout.Locators';
-import * as  tasksCheckout from '../CheckoutPage/checkout.Tasks';
+import * as  tasksCheckout from './checkout.Functions';
 import assertion = require('assert');
 import assert = require('soft-assert');
 
@@ -41,7 +41,6 @@ export function verifyElementsMatches(
     if (isLast) assert.softAssertAll();
   }
   
-  verifyElementsMatches(tasksCheckout.detailsCart,tasksMoist.moistItemsAdded,"ERROR",true)
 
 
 

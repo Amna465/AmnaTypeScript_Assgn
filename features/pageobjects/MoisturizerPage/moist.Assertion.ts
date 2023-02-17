@@ -1,5 +1,4 @@
-// import * as assert from 'assert';
-// import { ChainablePromiseElement } from 'webdriverio';
+
  import * as  locators from '../MoisturizerPage/moist.Locators';
 // import * as  tasks from '../MoisturizerPage/tasks';
 
