@@ -32,9 +32,7 @@ export async function checkTemperatue() {
         console.log("TEMPERATURE IS LESS THAN 19")
         await common.waitAndClick(homeLocators.btnMoisturizers);
         await moistAssertions.verifyMoistHeader();
-        await moistActions.moistProducts();
-        // await checkoutAssertion.verifyElementsMatches( moistActions.values,checkoutTasks.detailsCart,"ERROR",true)
-  
+        await moistActions.moistProducts(); 
 
     } else if (temp > 34) {
         console.log("TEMPERATURE IS GREATER THAN 34")
@@ -42,8 +40,7 @@ export async function checkTemperatue() {
         await browser.pause(2000);
         await sunAssertion.verifySunHeader();
         await sunActions.sunProducts();
-        // checkoutAssertion.verifyElementsMatches(moistActions.values, checkoutTasks.detailsCart, "ERROR", true)
-        console.log("CART ITEMS AND CLICKED ITEMS NAMES MATCHED")
+
     } else {
         console.log("Invalid Temperature")
     }

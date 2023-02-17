@@ -1,5 +1,3 @@
-
-// import { ChainablePromiseElement } from 'webdriverio';
 import * as  locators from '../SunscreenPage/sun.Locators';
 
 

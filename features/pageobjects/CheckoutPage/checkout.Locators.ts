@@ -1,6 +1,3 @@
-import { ChainablePromiseElement } from 'webdriverio';
-
-//import Page from './page';
 
 //XPATHS
 export let tableValue_1= ("//tbody//td[1]");

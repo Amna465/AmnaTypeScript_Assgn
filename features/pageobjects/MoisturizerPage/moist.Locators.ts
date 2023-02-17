@@ -1,6 +1,3 @@
-import { ChainablePromiseElement } from 'webdriverio';
-
-//import Page from './page';
 
 //XPATHS
 export let moistHeader = $("//h2[normalize-space()='Moisturizers']")
