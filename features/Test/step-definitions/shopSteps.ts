@@ -1,7 +1,7 @@
 import * as homePageTasks from "../../pageobjects/HomePage/home.Tasks";
 import * as homePageLocators from "../../pageobjects/HomePage/home.Locators";
 import * as homePageAssert from "../../pageobjects/HomePage/home.Asertion";
-import * as checkoutTasks from '../../pageobjects/CheckoutPage/checkout.Tasks'
+import * as checkoutTasks from '../../pageobjects/CheckoutPage/checkout.Functions'
 import * as checkoutLocators from '../../pageobjects/CheckoutPage/checkout.Locators'
 import * as checkoutAssertions from '../../pageobjects/CheckoutPage/checkout.Assertion'
 import * as commonAssertion from '../../pageobjects/common_assertions'
