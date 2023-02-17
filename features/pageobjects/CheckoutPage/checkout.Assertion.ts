@@ -1,7 +1,3 @@
-import * as tasksMoist from '../MoisturizerPage/moist.Functions';
-import * as tasksSun from '../SunscreenPage/sun.Functions';
-import * as locators from '../CheckoutPage/checkout.Locators';
-import * as tasksCheckout from './checkout.Functions';
 import assertion = require('assert');
 import assert = require('soft-assert');
 
